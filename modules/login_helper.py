@@ -24,4 +24,25 @@ def asmr_login(session, config):
             return False
     except Exception as e:
         print('登录响应异常:', resp.text)
-        return False 
+        return False
+
+def update_config_recommender_uuid(uuid):
+    config = configparser.ConfigParser()
+    config.read('config.ini', encoding='utf-8')
+    config.set('settings', 'recommenderUuid', uuid)
+    with open('config.ini', 'w', encoding='utf-8') as f:
+        config.write(f)
+
+def fetch_and_save_recommender_uuid(session):
+    url = "https://api.asmr-200.com/api/auth/me"
+    resp = session.get(url)
+    try:
+        data = resp.json()
+        uuid = data.get("user", {}).get("recommenderUuid")
+        if uuid:
+            update_config_recommender_uuid(uuid)
+            print(f"已自动写入 recommenderUuid: {uuid} 到 config.ini")
+        else:
+            print("未获取到 recommenderUuid")
+    except Exception as e:
+        print("获取 recommenderUuid 失败:", e)
