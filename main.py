@@ -19,4 +19,4 @@ def main():
         print("\n下载已取消，程序已安全退出。")
 
 if __name__ == '__main__':
-    main() 
+    main()
