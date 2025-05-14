@@ -41,7 +41,7 @@ asmronline/
 
 如需详细用法和参数说明，请参考各模块内注释。 
 
-##在根目录下创建 config.ini
+## 在根目录下创建 config.ini
 
 ```
 [credentials]
