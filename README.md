@@ -39,5 +39,30 @@ asmronline/
 - `downloader.py`：多线程下载、断点续传、限速
 - `utils.py`：配置读取、路径处理、日志等
 
----
 如需详细用法和参数说明，请参考各模块内注释。 
+
+##在根目录下创建 config.ini
+```
+[credentials]
+username = 
+password = 
+
+[settings]
+base_url = https://asmr.one
+work_id = RJ01332053
+download_speed = 5.0
+max_workers = 4
+max_retries = 3
+timeout = 30
+index = 0
+
+[paths]
+download_path = 
+temp_path = temp
+
+[proxy]
+enable = false
+type = http
+host = 127.0.0.1
+port = 7890
+```
