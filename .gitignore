@@ -40,4 +40,4 @@ Thumbs.db
 
 # 配置文件（含敏感信息）
 config.ini 
-modules/playlist_api.py
+

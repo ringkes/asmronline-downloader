@@ -18,6 +18,19 @@ def asmr_login(session, config):
         if req.get('user', {}).get('loggedIn'):
             token = req.get('token')
             session.headers.update({'authorization': f'Bearer {token}'})
+            # 登录成功后自动写入recommenderUuid和token到config.ini
+            user = req.get('user', {})
+            recommenderUuid = user.get('recommenderUuid', '')
+            if recommenderUuid or token:
+                if not config.has_section('credentials'):
+                    config.add_section('credentials')
+                config.set('credentials', 'recommenderUuid', recommenderUuid)
+                config.set('credentials', 'token', token)
+                with open('config.ini', 'w', encoding='utf-8') as f:
+                    config.write(f)
+                # print('recommenderUuid 和 token 已写入 config.ini')
+            # 登录成功后自动获取并写入recommenderUuid（保留原有功能）
+            fetch_and_save_recommender_uuid(session)
             return True
         else:
             print('登录失败:', req)
@@ -29,7 +42,9 @@ def asmr_login(session, config):
 def update_config_recommender_uuid(uuid):
     config = configparser.ConfigParser()
     config.read('config.ini', encoding='utf-8')
-    config.set('settings', 'recommenderUuid', uuid)
+    if not config.has_section('credentials'):
+        config.add_section('credentials')
+    config.set('credentials', 'recommenderUuid', uuid)
     with open('config.ini', 'w', encoding='utf-8') as f:
         config.write(f)
 

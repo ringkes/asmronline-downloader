@@ -45,20 +45,22 @@ asmronline/
 
 ```
 [credentials]
-username = 
-password = 
+username = ringkes
+password = ringkes157005
 
 [settings]
 base_url = https://asmr.one
-work_id = RJ01332053
+work_id = RJ379765
 download_speed = 5.0
 max_workers = 4
 max_retries = 3
 timeout = 30
 index = 0
+pagesize = 20
+max_count = 100
 
 [paths]
-download_path = 
+download_path =
 temp_path = temp
 
 [proxy]
